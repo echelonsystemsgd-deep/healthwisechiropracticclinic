@@ -152,12 +152,6 @@ export function Footer() {
             <Link href="/book-online" className="hover:text-slate-300 transition-colors">
               Book Appointment
             </Link>
-            <Link
-              href="/admin/outreach"
-              className="text-slate-400 hover:text-emerald-400 transition-colors flex items-center gap-1 font-semibold"
-            >
-              <span>Internal Dashboard</span>
-            </Link>
           </div>
         </div>
       </div>

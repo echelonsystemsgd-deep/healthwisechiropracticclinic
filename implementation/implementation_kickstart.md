@@ -696,4 +696,105 @@ Before finalising this plan, an exhaustive critical review was conducted. Below 
 - **[CONFIRM WITH CLIENT #5] Notification Dispatch Preferences:** Confirm whether incoming enquiries should alert the reception team via email, WhatsApp, or Telegram.
 
 ---
-*End of Master Architectural Specification — Awaiting User Approval to Proceed to Phase 4 (Build).*
+
+## 13. Metadata and Branding Plan
+
+### 13.1 Central Metadata Architecture (`site.config.ts`)
+To eliminate drift, all head tags, JSON-LD, Open Graph, Twitter cards, and structured markers will ingest from a single type-safe configuration file (`src/config/site.config.ts`):
+- **Clinic Legal Name:** Healthwise Chiropractic Clinic
+- **Short Name:** Healthwise (<= 12 chars for PWA manifest)
+- **Tagline:** Relieve Pain, Restore Mobility & Take Control of Your Health
+- **Description:** Private chiropractic clinic, remedial massage therapy, and posture rehabilitation in Cranford & Hounslow. Relieve back pain, neck stiffness, and sciatica with GCC-registered chiropractors. (158 chars)
+- **Base Canonical URL:** `https://www.healthwisechiropracticclinic.com`
+- **Locale:** `en_GB` (HTML `lang="en-GB"`)
+- **Telephone:** `0208 759 7177` (Canonical E.164 link: `tel:+442087597177`, International: `+44 20 8759 7177`)
+- **Clinic Address:** 730 Bath Road, Cranford, Hounslow, Greater London, TW5 9TW, United Kingdom
+- **Coordinates:** `51.4791` N, `-0.4132` W
+- **Hours:** Monday – Saturday: 08:00 – 19:00, Sunday: Closed
+- **Lead Practitioner:** Gurmeet Tulsi (MChiro, University of Surrey 2001, GCC Registered)
+- **Social Profiles:** Clinic-owned profiles only [CONFIRM WITH CLIENT]
+- **Theme Color:** `#76A436` (Herbal Olive) / Dark: `#1E293B`
+
+### 13.2 Titles, Head Tags & Open Graph Specifications
+- **Page Title Pattern:** `[Page Name] | Healthwise Chiropractic, Cranford, Hounslow` (50–60 characters; no keyword stuffing, zero false cure claims).
+  - Home: `Chiropractic & Remedial Massage | Healthwise Chiropractic, Cranford, Hounslow`
+  - Book Online: `Book an Appointment | Healthwise Chiropractic, Cranford, Hounslow`
+  - Privacy: `Privacy & Patient Data Policy | Healthwise Chiropractic, Cranford, Hounslow`
+- **Robots & Canonical:**
+  - Public pages: `index, follow` with explicit self-referencing canonical URL.
+  - Admin dashboard: `noindex, nofollow`, `noarchive`, `X-Robots-Tag: noindex, nofollow, noarchive`.
+- **Open Graph & Twitter Cards:**
+  - `og:title`, `og:description`, `og:type` (`website`), `og:site_name` ("Healthwise Chiropractic Clinic"), `og:locale` (`en_GB`).
+  - `og:image`: High-contrast branded 1200x630 card (`/assets/og/og-home.png`, `/assets/og/og-book.png`) featuring clinic green `#76A436`, white typography, clinic name, and address inside safe margins (no stock faces, no third-party logos).
+  - Twitter Card: `summary_large_image`.
+- **Structured Data (JSON-LD):**
+  - Type: `["Chiropractor", "MedicalBusiness", "LocalBusiness"]` (verified against Schema.org standard).
+  - Attributes: `name`, `image`, `url`, `telephone`, `priceRange`, `address`, `geo`, `openingHoursSpecification`, `medicalSpecialty` ("Chiropractic"), `aggregateRating` (4.9 / 58 reviews [CONFIRM WITH CLIENT]).
+- **Sitemap & Robots:**
+  - `sitemap.xml`: Contains `/`, `/book-online`, `/privacy-policy`. Explicitly excludes `/admin/*`.
+  - `robots.txt`: Disallows `/admin/`, `/api/`. Points to canonical sitemap.
+- **Security & Hygiene Meta:**
+  - Add `security.txt` (`/.well-known/security.txt`) with clinic contact if approved [CONFIRM WITH CLIENT].
+  - Format-detection: `telephone=yes`.
+  - Complete removal of any generator tags or tooling headers.
+
+### 13.3 Icon & Progressive Web App (PWA) Manifest Architecture
+Generated from the clinic's square mark (high-contrast leaf and spinal curve on solid brand background):
+- `public/favicon.ico`: Multi-resolution (16x16, 32x32, 48x48)
+- `public/favicon-16x16.png` & `public/favicon-32x32.png`
+- `public/icon.svg`: Scalable vector mark with dark-mode support via `prefers-color-scheme`
+- `public/apple-touch-icon.png`: 180x180 px, opaque background `#76A436`, no transparency, sharp corners (iOS handles rounding)
+- `public/android-chrome-192x192.png` & `public/android-chrome-512x512.png`
+- `public/maskable-icon-512.png`: 512x512 px with the mark centered in the 80% safe circle on solid `#76A436`
+- `public/safari-pinned-tab.svg`: Single-color monochrome vector with mask-icon color `#76A436`
+- `public/mstile-150x150.png` & `public/browserconfig.xml`
+- `public/manifest.webmanifest`:
+  ```json
+  {
+    "name": "Healthwise Chiropractic Clinic",
+    "short_name": "Healthwise",
+    "description": "Trusted chiropractic care & remedial massage in Cranford, Hounslow.",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#F8FAF8",
+    "theme_color": "#76A436",
+    "lang": "en-GB",
+    "icons": [
+      { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
+      { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+      { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
+      { "src": "/maskable-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    ]
+  }
+  ```
+
+### 13.4 Tooling & Third-Party Branding Elimination
+1. **Repository Hygiene (`package.json`, `README.md`):**
+   - Rewrite `package.json`: `"name": "healthwise-chiropractic-site"`, `"description": "Healthwise Chiropractic Clinic patient web application and internal practice operations portal"`, `"private": true`, author set to `"Healthwise Chiropractic Clinic"`, repository and personal homepage fields stripped.
+   - Neutral internal `README.md`: Internal handover documentation with zero promotional badges, framework badges, or "Deploy to Vercel" buttons.
+2. **Third-Party Licenses:**
+   - Consolidate all required open-source notices (MIT, OFL, Apache 2.0) into `THIRD_PARTY_NOTICES.md` at repo root. Never expose or link on public UI.
+3. **HTTP Response Headers:**
+   - Enforce `poweredByHeader: false` in `next.config.ts`.
+   - Strip all custom headers naming tools.
+   - Add `X-Robots-Tag: noindex, nofollow, noarchive` for `/admin/:path*`.
+   - Document immutable host-level headers (e.g. `Server: Vercel`, `x-vercel-id` or local Next.js cache headers) and specify proxy/custom domain remedies.
+4. **Custom Branded Runtime Error Pages:**
+   - Create custom `src/app/not-found.tsx` (404) with warm clinical styling and direct button back to appointment booking.
+   - Create custom `src/app/error.tsx` (500) and `src/app/global-error.tsx`.
+   - Zero default Next.js error overlays or black/white minimalist 404 screens.
+5. **Third-Party Marks & Widgets Handling:**
+   - **WhatsApp:** Use neutral chat bubble icon with label "WhatsApp" (`MessageCircle` from Lucide) rather than green third-party trademark [CONFIRM WITH CLIENT if official logo is preferred for conversion].
+   - **Google Reviews:** Plain text attribution "Google Verified Review" and star rating without the multicolor Google "G" logo.
+   - **Google Maps:** Provide accessible fallback card with clinic address and directions link; retain required attribution only within embed.
+
+### 13.5 Admin Dashboard Isolation Architecture
+The internal practice growth portal (`/admin/outreach`) must never expose public patient branding or leak to public search crawlers:
+- **Indexing Defense:** Blocked in `robots.txt` (`Disallow: /admin/`), excluded from `sitemap.xml`, has `robots: { index: false, follow: false }` metadata, and HTTP header `X-Robots-Tag: noindex, nofollow`.
+- **Public Footer Link Removal:** The link to `/admin/outreach` in `Footer.tsx` must be removed immediately from the public patient site.
+- **Dedicated Unbranded Layout:** Create `src/app/admin/layout.tsx` providing an isolated internal dashboard shell. It does not render the public clinic navigation, appointment booking CTA, or patient footer.
+- **Dashboard Branding Identity:** Brand as an internal operations tool with neutral title: `"Outreach & Partner Pipeline | Practice Growth System"` [CONFIRM: Agency name vs Internal clinic tool name]. Use a minimalist operational glyph icon instead of the public medical clinic leaf/spine logo.
+
+---
+*End of Master Architectural Specification — Awaiting User Approval to Proceed to Implementation.*

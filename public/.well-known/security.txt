@@ -1,0 +1,5 @@
+Contact: mailto:info@healthwisechiropracticclinic.com
+Expires: 2027-10-07T10:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.healthwisechiropracticclinic.com/.well-known/security.txt
+Policy: https://www.healthwisechiropracticclinic.com/privacy-policy

@@ -1,6 +1,8 @@
 {
-  "name": "healthwisechiropracticclinic",
+  "name": "healthwise-chiropractic-site",
   "version": "1.0.0",
+  "description": "Healthwise Chiropractic Clinic patient web application and internal practice operations portal",
+  "author": "Healthwise Chiropractic Clinic",
   "private": true,
   "scripts": {
     "dev": "next dev",

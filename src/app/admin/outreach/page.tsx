@@ -10,33 +10,34 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, RefreshCw, Download, Plus } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Outreach & Growth Pipeline | Healthwise Internal Admin",
+  title: "Outreach & Growth Pipeline | Practice Growth System",
   description:
-    "Internal outreach analytics, partner referral pipeline, and patient engagement performance for Healthwise Chiropractic Clinic.",
+    "Internal outreach analytics, partner referral pipeline, and patient engagement performance.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    noarchive: true,
+  },
 };
 
 export default function OutreachAdminPage() {
   return (
     <div className="bg-slate-50 min-h-screen py-8 lg:py-12">
       <div className="container mx-auto px-4 sm:px-6 space-y-8">
-        {/* Top Header Bar & Pill Navigation (No Eyebrow Text per instructions) */}
+        {/* Top Header Bar & Pill Navigation */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
           <div>
             <div className="flex items-center gap-3">
-              <Button asChild variant="ghost" size="sm" className="-ml-2 h-8 px-2 text-slate-500">
-                <Link href="/">
-                  <ArrowLeft className="h-4 w-4 mr-1" /> Back to Clinic Site
-                </Link>
-              </Button>
               <span className="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full border border-amber-200">
                 Sample data
               </span>
             </div>
-            <h1 className="font-heading text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
+            <h1 className="font-heading text-2xl sm:text-3xl font-bold text-slate-900 mt-2">
               Outreach &amp; Partnership Pipeline
             </h1>
             <p className="text-xs text-slate-500 mt-0.5">
-              Healthwise Chiropractic Clinic • Internal Practice Growth View
+              Practice Growth System • Internal Operational View
             </p>
           </div>
 

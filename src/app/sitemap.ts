@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
+import { SITE_CONFIG } from "@/config/site.config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.healthwisechiropracticclinic.com";
+  const baseUrl = SITE_CONFIG.url;
 
   return [
     {
@@ -21,12 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/admin/outreach`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.4,
     },
   ];
 }

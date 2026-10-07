@@ -1,90 +1,64 @@
-# Healthwise Chiropractic Clinic Rebuild & Internal Outreach Dashboard
+# Healthwise Chiropractic Clinic — Web Application & Practice Operations Portal
 
-Modern high-conversion website rebuild and internal practice outreach dashboard for **Healthwise Chiropractic Clinic** (730 Bath Rd, Cranford, Hounslow TW5 9TW, UK).
-
-Built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS**, **Shadcn UI (Radix Primitives)**, and **Bklit Charts**.
+Internal handover and technical operations documentation for **Healthwise Chiropractic Clinic** (730 Bath Road, Cranford, Hounslow TW5 9TW, United Kingdom).
 
 ---
 
-## 🚀 Live Demo & Key Pages
+## 1. Application Architecture & Key Routes
 
-| Route | Purpose & Key Features |
-|---|---|
-| `/` | **Master Landing Page:** Single semantic `<h1>`, high-trust medical hero, GCC accreditation badges, comprehensive services breakdown, step-by-step first-visit journey walkthrough, verified practitioner profiles, 10 verbatim Google patient reviews, clinical FAQ accordion, and interactive appointment enquiry engine. |
-| `/book-online` | **Dedicated Appointment Engine:** Solves the circular loop bug. Standalone booking page with condition routing, practitioner selection, click-to-call, and WhatsApp actions. |
-| `/admin/outreach` | **Internal Sales & Outreach Dashboard:** Designed with identical brand tokens. Features 5 KPI metric cards with Lucide icons and delta indicators, Bklit Conversion Funnel chart, 12-week Volume & Replies trend area chart, and active leads queue table. All sample data visibly marked. |
-| `/privacy-policy` | **UK GDPR & Data Protection Policy:** Patient health record compliance notice per GCC retention standards. |
-| `/sitemap.xml` | Dynamically generated Next.js XML sitemap. |
-| `/robots.txt` | Standard search crawler indexing directives. |
-
----
-
-## 📱 Mobile-First Optimisation
-
-- **Thumb-Zone Sticky Action Bar:** Fixed persistent bottom navigation on mobile viewports (`< 768px`) with direct **Call Clinic** (`tel:+442087597177`), **WhatsApp** chat, and **Book Online** actions with iPhone safe-area inset support (`env(safe-area-inset-bottom)`).
-- **Responsive Drawer:** Slide-down navigation drawer on mobile with large touch targets.
-- **Zero Horizontal Overflow:** Strict layout grid responsive from 360px up to 4K displays.
-- **Single Canonical Phone Link:** Standardized international E.164 phone number (`+442087597177`) used consistently across all header, body, footer, and mobile bar triggers, fixing the dialer bug.
+| Route | Purpose & Key Interfaces | Access Level |
+|---|---|---|
+| `/` | **Patient Landing Hub:** High-trust medical hero, GCC statutory regulation markers, comprehensive service breakdowns, first-visit patient journey guide, verified practitioner profiles, verbatim patient reviews, clinical FAQ accordion, and interactive appointment enquiry engine. | Public / Indexed |
+| `/book-online` | **Clinical Assessment Booking:** Standalone appointment request route with condition routing, practitioner selection, direct phone link, and WhatsApp communication channels. | Public / Indexed |
+| `/privacy-policy` | **Patient Data Protection Notice:** UK Data Protection Act 2018 and UK GDPR compliance documentation covering medical health record retention per General Chiropractic Council (GCC) standards. | Public / Indexed |
+| `/admin/outreach` | **Practice Growth Portal:** Internal partner referral pipeline, communication volume trend analytics, and active leads triage queue. | Internal / Non-Indexed (`noindex, nofollow`) |
+| `/sitemap.xml` | XML sitemap containing public patient routes only. | Public |
+| `/robots.txt` | Crawler policy enforcing disallow rules for internal operations and API paths. | Public |
 
 ---
 
-## 🛠️ Audit Fixes Verified
-
-- **Fix #1 (P0):** `/book-online` circular loop resolved; replaced with working interactive appointment engine and zero self-referencing links.
-- **Fix #2 (P0):** Form dropdown options now have valid string values (`value="initial_consultation"`, etc.); replaced raw textareas with an accessible Radix checkbox for GDPR consent.
-- **Fix #3 (P1):** Removed stale £60 summer popup modal.
-- **Fix #4 (P1):** Added sticky mobile CTA bar with one-touch Call and WhatsApp channels.
-- **Fix #5 (P1):** Enforced single canonical phone link `tel:+442087597177` across all pages.
-- **Fix #6 (P1):** Next.js Server Components with static generation, zero heavy Elementor assets, explicit image dimensions, and sub-160KB initial JS payload.
-- **Fix #7 (P2):** All 6 HTTP defense security headers (`HSTS`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-DNS-Prefetch-Control`) configured in `next.config.ts`.
-
----
-
-## 💻 Running Locally & Building
+## 2. Environment Setup & Operations
 
 ### Prerequisites
-- Node.js `v20+` or `v24+`
-- `pnpm` (or `npm`)
+- Node.js (v20+ LTS or v22+)
+- pnpm package manager
 
-### Install Dependencies
+### Installation
 ```bash
 pnpm install
 ```
 
-### Start Development Server
+### Development Server
 ```bash
 pnpm dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Access the application locally at `http://localhost:3000`.
 
-### Create Production Build
+### Production Build & Verification
 ```bash
 pnpm build
 ```
+Creates an optimized production bundle with full static pre-rendering, custom defense headers, and verified asset references.
 
-### Start Production Server
+### Production Execution
 ```bash
 pnpm start
 ```
 
 ---
 
-## 📝 How to Edit Content
+## 3. Content & Configuration Management
 
-- **Clinic Constants & Phone Numbers:** Edit `src/lib/constants.ts` (updates phone, address, hours, and clinic info everywhere automatically).
-- **Practitioners & Bios:** Edit `PRACTITIONERS` array in `src/lib/mock-data.ts`.
-- **Verbatim Patient Testimonials:** Edit `TESTIMONIALS` array in `src/lib/mock-data.ts`.
-- **Services & Conditions:** Edit `SERVICES` and `CONDITIONS` arrays in `src/lib/mock-data.ts`.
-- **Dashboard Outreach Data:** Edit `DASHBOARD_KPIS`, `FUNNEL_STAGES`, and `RECENT_LEADS` in `src/lib/mock-data.ts`.
-- **Design Tokens & Theme Colors:** Edit `src/app/globals.css` and `tailwind.config.js`.
+All clinic data is centralized to prevent configuration drift:
+
+- **Clinic Contact & Metadata:** Update `src/config/site.config.ts` (manages telephone numbers, clinic hours, address, canonical URLs, and schema metadata across all pages).
+- **Practitioner Profiles & Credentials:** Maintained in `src/lib/mock-data.ts` (`PRACTITIONERS` array).
+- **Patient Testimonials & Reviews:** Maintained in `src/lib/mock-data.ts` (`TESTIMONIALS` array).
+- **Services & Musculoskeletal Conditions:** Maintained in `src/lib/mock-data.ts` (`SERVICES` and `CONDITIONS` arrays).
+- **Brand Tokens & Styles:** Configured in `src/app/globals.css` and `tailwind.config.js`.
 
 ---
 
-## 🚢 Deployment
+## 4. Legal & Licensing Notices
 
-Ready for one-click deployment to **Vercel**, **Cloudflare Pages**, or any Node.js hosting platform:
-```bash
-# Deploy to Vercel
-pnpm dlx vercel
-```
-Or export static HTML by setting `output: 'export'` in `next.config.ts` if static S3/Netlify hosting is preferred.
+Attribution for bundled open-source components is documented in `THIRD_PARTY_NOTICES.md` at the repository root.

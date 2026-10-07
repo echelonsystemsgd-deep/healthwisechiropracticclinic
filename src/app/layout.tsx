@@ -1,10 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Encode_Sans_Semi_Condensed, Roboto } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/site/Header";
-import { Footer } from "@/components/site/Footer";
-import { MobileActionBar } from "@/components/site/MobileActionBar";
-import { CLINIC_CONFIG } from "@/lib/constants";
+import { SITE_CONFIG } from "@/config/site.config";
 
 const encodeSans = Encode_Sans_Semi_Condensed({
   subsets: ["latin"],
@@ -21,20 +18,31 @@ const roboto = Roboto({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#76A436",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#76A436" },
+    { media: "(prefers-color-scheme: dark)", color: "#1E293B" },
+  ],
+  colorScheme: "light",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.healthwisechiropracticclinic.com"),
+  metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: "Healthwise Chiropractic Clinic | Cranford & Hounslow",
-    template: "%s | Healthwise Chiropractic Clinic",
+    default: SITE_CONFIG.pages.home.title,
+    template: `%s | ${SITE_CONFIG.name}, Cranford, Hounslow`,
   },
-  description:
-    "Private chiropractic clinic, remedial massage therapy, and posture rehabilitation in Hounslow & Cranford. Relieve back pain, neck stiffness, and sciatica with GCC-registered chiropractors.",
+  description: SITE_CONFIG.pages.home.description,
+  applicationName: SITE_CONFIG.name,
+  authors: [
+    {
+      name: `${SITE_CONFIG.clinicalLeadership.director} (${SITE_CONFIG.clinicalLeadership.credentials})`,
+    },
+  ],
+  creator: SITE_CONFIG.name,
+  publisher: SITE_CONFIG.name,
   keywords: [
     "Chiropractor Hounslow",
     "Chiropractor Cranford",
@@ -45,9 +53,35 @@ export const metadata: Metadata = {
     "Gurmeet Tulsi chiropractor",
     "GCC registered chiropractor West London",
   ],
-  authors: [{ name: "Gurmeet Tulsi (MChiro, University of Surrey)" }],
-  creator: "Healthwise Chiropractic Clinic",
-  publisher: "Healthwise Chiropractic Clinic",
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/safari-pinned-tab.svg",
+        color: "#76A436",
+      },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: SITE_CONFIG.shortName,
+  },
   robots: {
     index: true,
     follow: true,
@@ -58,29 +92,28 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_GB",
-    url: "https://www.healthwisechiropracticclinic.com",
-    title: "Healthwise Chiropractic Clinic | Cranford & Hounslow",
-    description:
-      "Trusted, GCC-registered chiropractic care, remedial massage therapy, and spinal rehabilitation in Hounslow since 2002.",
-    siteName: "Healthwise Chiropractic Clinic",
+    locale: SITE_CONFIG.locale,
+    url: SITE_CONFIG.pages.home.canonical,
+    title: SITE_CONFIG.pages.home.title,
+    description: SITE_CONFIG.pages.home.description,
+    siteName: SITE_CONFIG.name,
     images: [
       {
-        url: "/og-image.jpg",
+        url: SITE_CONFIG.pages.home.ogImage,
         width: 1200,
         height: 630,
-        alt: "Healthwise Chiropractic Clinic Hounslow",
+        alt: `${SITE_CONFIG.name} Cranford Hounslow`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Healthwise Chiropractic Clinic | Hounslow",
-    description:
-      "Trusted chiropractic care, remedial massage & spinal rehabilitation in Cranford, Hounslow.",
+    title: SITE_CONFIG.pages.home.title,
+    description: SITE_CONFIG.pages.home.description,
+    images: [SITE_CONFIG.pages.home.ogImage],
   },
   alternates: {
-    canonical: "https://www.healthwisechiropracticclinic.com",
+    canonical: SITE_CONFIG.pages.home.canonical,
   },
 };
 
@@ -89,67 +122,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Schema.org LocalBusiness & MedicalBusiness (Chiropractor)
-  const schemaMarkup = {
-    "@context": "https://schema.org",
-    "@type": ["Chiropractor", "MedicalBusiness", "LocalBusiness"],
-    name: CLINIC_CONFIG.name,
-    image: "https://www.healthwisechiropracticclinic.com/og-image.jpg",
-    "@id": "https://www.healthwisechiropracticclinic.com/#clinic",
-    url: "https://www.healthwisechiropracticclinic.com",
-    telephone: CLINIC_CONFIG.phoneUrl.replace("tel:", ""),
-    priceRange: "££",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: CLINIC_CONFIG.address.line1,
-      addressLocality: CLINIC_CONFIG.address.area,
-      addressRegion: CLINIC_CONFIG.address.city,
-      postalCode: CLINIC_CONFIG.address.postcode,
-      addressCountry: "GB",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 51.4791,
-      longitude: -0.4132,
-    },
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
-        opens: "08:00",
-        closes: "19:00",
-      },
-    ],
-    medicalSpecialty: "Chiropractic",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "58",
-      bestRating: "5",
-      worstRating: "1",
-    },
-  };
-
   return (
     <html lang="en-GB" className={`${encodeSans.variable} ${roboto.variable}`}>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
-        />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta name="msapplication-TileColor" content="#76A436" />
       </head>
       <body className="flex min-h-screen flex-col font-sans text-slate-800 antialiased selection:bg-primary/20 selection:text-primary">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <MobileActionBar />
+        {children}
       </body>
     </html>
   );

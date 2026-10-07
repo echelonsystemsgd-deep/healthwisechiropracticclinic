@@ -5,10 +5,36 @@ import { CLINIC_CONFIG } from "@/lib/constants";
 import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { SITE_CONFIG } from "@/config/site.config";
+
 export const metadata: Metadata = {
-  title: "Privacy & Data Protection Policy | Healthwise Chiropractic",
-  description:
-    "UK GDPR Privacy and Patient Data Protection Policy for Healthwise Chiropractic Clinic, 730 Bath Road, Cranford, Hounslow.",
+  title: SITE_CONFIG.pages.privacyPolicy.title,
+  description: SITE_CONFIG.pages.privacyPolicy.description,
+  alternates: {
+    canonical: SITE_CONFIG.pages.privacyPolicy.canonical,
+  },
+  openGraph: {
+    title: SITE_CONFIG.pages.privacyPolicy.title,
+    description: SITE_CONFIG.pages.privacyPolicy.description,
+    url: SITE_CONFIG.pages.privacyPolicy.canonical,
+    type: "website",
+    locale: SITE_CONFIG.locale,
+    siteName: SITE_CONFIG.name,
+    images: [
+      {
+        url: SITE_CONFIG.pages.privacyPolicy.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Privacy & Patient Data Protection Policy",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.pages.privacyPolicy.title,
+    description: SITE_CONFIG.pages.privacyPolicy.description,
+    images: [SITE_CONFIG.pages.privacyPolicy.ogImage],
+  },
 };
 
 export default function PrivacyPolicyPage() {

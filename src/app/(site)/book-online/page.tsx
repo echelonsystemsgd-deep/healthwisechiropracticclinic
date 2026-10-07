@@ -5,10 +5,36 @@ import { CLINIC_CONFIG } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
 import { ShieldCheck, Phone, MapPin, Calendar, Clock, Check } from "lucide-react";
 
+import { SITE_CONFIG } from "@/config/site.config";
+
 export const metadata: Metadata = {
-  title: "Book Online | Appointment Booking",
-  description:
-    "Request an appointment at Healthwise Chiropractic Clinic in Hounslow. Complete spinal consultation, posture assessment & treatment with GCC registered chiropractors.",
+  title: SITE_CONFIG.pages.bookOnline.title,
+  description: SITE_CONFIG.pages.bookOnline.description,
+  alternates: {
+    canonical: SITE_CONFIG.pages.bookOnline.canonical,
+  },
+  openGraph: {
+    title: SITE_CONFIG.pages.bookOnline.title,
+    description: SITE_CONFIG.pages.bookOnline.description,
+    url: SITE_CONFIG.pages.bookOnline.canonical,
+    type: "website",
+    locale: SITE_CONFIG.locale,
+    siteName: SITE_CONFIG.name,
+    images: [
+      {
+        url: SITE_CONFIG.pages.bookOnline.ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Book an Appointment at Healthwise Chiropractic Clinic",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.pages.bookOnline.title,
+    description: SITE_CONFIG.pages.bookOnline.description,
+    images: [SITE_CONFIG.pages.bookOnline.ogImage],
+  },
 };
 
 export default function BookOnlinePage() {

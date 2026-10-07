@@ -27,11 +27,24 @@ const securityHeaders = [
   },
 ];
 
+const adminSecurityHeaders = [
+  ...securityHeaders,
+  {
+    key: "X-Robots-Tag",
+    value: "noindex, nofollow, noarchive",
+  },
+];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  productionBrowserSourceMaps: false,
   async headers() {
     return [
+      {
+        source: "/admin/:path*",
+        headers: adminSecurityHeaders,
+      },
       {
         source: "/:path*",
         headers: securityHeaders,
