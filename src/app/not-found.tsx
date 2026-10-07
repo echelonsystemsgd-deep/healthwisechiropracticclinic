@@ -1,48 +1,20 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/config/site.config";
-import { Calendar, Home, Phone, RefreshCw, Sparkles, CheckCircle2 } from "lucide-react";
+import { Calendar, Home, Phone } from "lucide-react";
 
 export default function NotFound() {
-  const [isAdjusted, setIsAdjusted] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
-
-  // Auto-play the adjustment animation shortly after mount (like the antique lamp turning on)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      triggerAdjustment();
-    }, 1200);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const triggerAdjustment = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIsAdjusted(false);
-
-    // Simulate the anticipatory tension and then the satisfying "CLICK / ADJUSTMENT"
-    setTimeout(() => {
-      setIsAdjusted(true);
-      setClickCount((prev) => prev + 1);
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 900);
-    }, 600);
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-emerald-50/20 text-slate-800 flex flex-col justify-between py-8 px-4 sm:px-6 relative overflow-hidden select-none">
-      {/* Background Postural Plumb Line Grid (subtle medical ergonomics watermark) */}
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-emerald-50/20 text-slate-800 flex flex-col justify-between py-6 sm:py-10 px-4 sm:px-6 relative overflow-hidden select-none">
+      
+      {/* Background Postural Ergonomic Plumb-Line Grid */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02]"
+        className="absolute inset-0 pointer-events-none opacity-[0.035]"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, #1E293B 1px, transparent 0)`,
-          backgroundSize: "28px 28px",
+          backgroundSize: "24px 24px",
         }}
         aria-hidden="true"
       />
@@ -54,7 +26,7 @@ export default function NotFound() {
       />
 
       {/* Top Clinic Header Branding */}
-      <header className="relative z-10 max-w-4xl mx-auto w-full flex items-center justify-between pb-4">
+      <header className="relative z-10 max-w-4xl mx-auto w-full flex items-center justify-between pb-2 sm:pb-4">
         <Link 
           href="/" 
           className="inline-flex items-center gap-2.5 text-slate-900 hover:text-primary transition-colors group"
@@ -83,309 +55,509 @@ export default function NotFound() {
         </a>
       </header>
 
-      {/* Main Interactive Stage */}
-      <main className="relative z-10 max-w-2xl mx-auto my-auto w-full text-center flex flex-col items-center">
+      {/* Main Hero & Animation Stage */}
+      <main className="relative z-10 max-w-3xl mx-auto my-auto w-full text-center flex flex-col items-center">
+        
         {/* Diagnostic Status Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4 animate-fade-in">
-          {isAdjusted ? (
-            <>
-              <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-              <span>Alignment Restored</span>
-            </>
-          ) : (
-            <>
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-              </span>
-              <span>Subluxation Detected • 404 Missing</span>
-            </>
-          )}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider mb-2">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>Postural Examination • 404 Missing Route</span>
         </div>
 
         {/* =========================================================================
-            BESPOKE ANIMATED CHARACTER STAGE ("SPINEY" THE VERTEBRA & 404)
+            CINEMATIC LOOPING VECTOR STAGE (INSPIRED BY WHATSAPP ANTIQUE LAMP VIDEO)
            ========================================================================= */}
-        <div 
-          className="relative w-full max-w-md sm:max-w-lg mx-auto py-2 flex flex-col items-center justify-center cursor-pointer group"
-          onClick={triggerAdjustment}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); triggerAdjustment(); } }}
-          aria-label="Click to realign the chiropractic vertebrae"
-          title="Click to trigger a chiropractic adjustment!"
-        >
-          {/* Postural Healing Halo / Light Cone (Inspired by the Antique Lamp's Light Beam) */}
-          <div 
-            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 rounded-full transition-all duration-700 pointer-events-none ${
-              isAdjusted 
-                ? "bg-gradient-to-tr from-primary/15 via-emerald-400/10 to-teal-200/5 blur-2xl scale-110 opacity-100" 
-                : "bg-slate-200/40 blur-xl scale-75 opacity-40"
-            }`}
-          />
+        <div className="relative w-full max-w-xl mx-auto my-2 sm:my-4 flex items-center justify-center">
+          
+          <svg
+            viewBox="0 0 600 240"
+            className="w-full h-auto max-h-[220px] sm:max-h-[260px] overflow-visible drop-shadow-sm"
+            aria-label="Continuous animated scene of Spiney the vertebra mascot inspecting the 404 numbers with a searchlight"
+          >
+            <defs>
+              {/* Floor Horizon Gradient */}
+              <linearGradient id="floorGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#E2E8F0" stopOpacity="0" />
+                <stop offset="20%" stopColor="#CBD5E1" stopOpacity="0.6" />
+                <stop offset="50%" stopColor="#94A3B8" stopOpacity="0.8" />
+                <stop offset="80%" stopColor="#CBD5E1" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="#E2E8F0" stopOpacity="0" />
+              </linearGradient>
 
-          {/* Sparkle Particle Shockwave Ring (Triggers upon adjustment pop) */}
-          {isAdjusted && isAnimating && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-48 h-48 rounded-full border-2 border-primary/40 animate-ping opacity-60" />
-              <div className="absolute top-1/4 left-1/3 text-primary animate-bounce">
-                <Sparkles className="w-5 h-5 text-amber-400 animate-spin" />
-              </div>
-              <div className="absolute bottom-1/3 right-1/4 text-primary animate-pulse">
-                <Sparkles className="w-4 h-4 text-primary" />
-              </div>
-            </div>
-          )}
+              {/* Conical Searchlight Beam Gradient */}
+              <linearGradient id="lightBeamGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#8CB843" stopOpacity="0.85" />
+                <stop offset="25%" stopColor="#A3E635" stopOpacity="0.45" />
+                <stop offset="70%" stopColor="#BEF264" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#ECFCCB" stopOpacity="0.02" />
+              </linearGradient>
 
-          {/* NUMBERS & CHARACTER COMPOSITION */}
-          <div className="relative flex items-center justify-center gap-1 sm:gap-3 w-full h-44 sm:h-52">
-            
-            {/* Number "4" Left */}
-            <span className="font-heading text-6xl sm:text-8xl font-black tracking-tighter text-slate-300 transition-colors duration-500 select-none">
-              4
-            </span>
+              {/* Illuminated Floor Pool Gradient */}
+              <radialGradient id="floorPoolGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#8CB843" stopOpacity="0.75" />
+                <stop offset="40%" stopColor="#A3E635" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="#BEF264" stopOpacity="0" />
+              </radialGradient>
 
-            {/* Central Animated Character: "Spiney the Vertebra" & the "0" */}
-            <div className="relative flex items-center justify-center mx-1 sm:mx-2 w-32 sm:w-40 h-full">
+              {/* Vertebra Disc Gradient */}
+              <linearGradient id="vertebraGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#8CB843" />
+                <stop offset="100%" stopColor="#76A436" />
+              </linearGradient>
+
+              {/* Cervical Head Gradient */}
+              <linearGradient id="headGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#334155" />
+                <stop offset="100%" stopColor="#1E293B" />
+              </linearGradient>
+
+              {/* CSS Animations Embedded Inside SVG for 60FPS Performance */}
+              <style>{`
+                /* Master Hopping Traversal Loop across the 404 Stage */
+                @keyframes spiney-traversal {
+                  0% {
+                    transform: translate(470px, 140px);
+                  }
+                  /* Hop 1: Squash & Leap towards center */
+                  4% {
+                    transform: translate(470px, 145px) scale(1.18, 0.8); /* Squash */
+                  }
+                  10% {
+                    transform: translate(420px, 75px) scale(0.85, 1.25) rotate(-10deg); /* High Apex */
+                  }
+                  16% {
+                    transform: translate(375px, 144px) scale(1.22, 0.78); /* Land squash */
+                  }
+                  20% {
+                    transform: translate(375px, 140px) scale(1, 1); /* Settle */
+                  }
+                  /* Hop 2: Leap into Center Stage */
+                  24% {
+                    transform: translate(375px, 145px) scale(1.18, 0.8); /* Squash */
+                  }
+                  30% {
+                    transform: translate(325px, 75px) scale(0.85, 1.25) rotate(-10deg); /* High Apex */
+                  }
+                  36% {
+                    transform: translate(280px, 144px) scale(1.22, 0.78); /* Land squash */
+                  }
+                  40% {
+                    transform: translate(280px, 140px) scale(1, 1) rotate(0deg); /* Stand Center */
+                  }
+                  /* Inspection: Sits Center-Stage Looking Around */
+                  44% {
+                    transform: translate(280px, 140px) rotate(-8deg); /* Tilt Left */
+                  }
+                  50% {
+                    transform: translate(280px, 140px) rotate(8deg); /* Tilt Right */
+                  }
+                  55% {
+                    transform: translate(280px, 140px) rotate(0deg); /* Facing Forward */
+                  }
+                  /* Examination: Leans forward while light beam shines */
+                  58% {
+                    transform: translate(280px, 142px) scale(1.05, 0.95);
+                  }
+                  64% {
+                    transform: translate(280px, 142px) scale(1.05, 0.95) rotate(-5deg);
+                  }
+                  70% {
+                    transform: translate(280px, 142px) scale(1.05, 0.95) rotate(5deg);
+                  }
+                  76% {
+                    transform: translate(280px, 140px) scale(1, 1);
+                  }
+                  /* Shrug & Reset Leap back to start */
+                  80% {
+                    transform: translate(280px, 140px);
+                  }
+                  84% {
+                    transform: translate(280px, 146px) scale(1.2, 0.78);
+                  }
+                  90% {
+                    transform: translate(380px, 70px) scale(0.88, 1.22) rotate(12deg);
+                  }
+                  96% {
+                    transform: translate(470px, 143px) scale(1.18, 0.82);
+                  }
+                  100% {
+                    transform: translate(470px, 140px) scale(1, 1);
+                  }
+                }
+
+                /* Synchronized Dynamic Floor Contact Shadow */
+                @keyframes shadow-physics {
+                  0% {
+                    transform: translate(470px, 204px) scale(1, 1);
+                    opacity: 0.6;
+                  }
+                  4% {
+                    transform: translate(470px, 204px) scale(1.3, 0.9);
+                    opacity: 0.8;
+                  }
+                  10% {
+                    transform: translate(420px, 204px) scale(0.5, 0.4);
+                    opacity: 0.2;
+                  }
+                  16% {
+                    transform: translate(375px, 204px) scale(1.35, 0.85);
+                    opacity: 0.85;
+                  }
+                  20% {
+                    transform: translate(375px, 204px) scale(1, 1);
+                    opacity: 0.6;
+                  }
+                  24% {
+                    transform: translate(375px, 204px) scale(1.3, 0.9);
+                    opacity: 0.8;
+                  }
+                  30% {
+                    transform: translate(325px, 204px) scale(0.5, 0.4);
+                    opacity: 0.2;
+                  }
+                  36% {
+                    transform: translate(280px, 204px) scale(1.35, 0.85);
+                    opacity: 0.85;
+                  }
+                  40%, 80% {
+                    transform: translate(280px, 204px) scale(1, 1);
+                    opacity: 0.6;
+                  }
+                  84% {
+                    transform: translate(280px, 204px) scale(1.3, 0.9);
+                    opacity: 0.8;
+                  }
+                  90% {
+                    transform: translate(380px, 204px) scale(0.5, 0.4);
+                    opacity: 0.2;
+                  }
+                  96% {
+                    transform: translate(470px, 204px) scale(1.3, 0.85);
+                    opacity: 0.85;
+                  }
+                  100% {
+                    transform: translate(470px, 204px) scale(1, 1);
+                    opacity: 0.6;
+                  }
+                }
+
+                /* Botanical Leaf Inertial Follow-Through */
+                @keyframes leaf-followthrough {
+                  0%, 100% {
+                    transform: rotate(0deg);
+                  }
+                  10% {
+                    transform: rotate(-18deg);
+                  }
+                  16% {
+                    transform: rotate(14deg);
+                  }
+                  30% {
+                    transform: rotate(-18deg);
+                  }
+                  36% {
+                    transform: rotate(14deg);
+                  }
+                  44% {
+                    transform: rotate(-10deg);
+                  }
+                  50% {
+                    transform: rotate(10deg);
+                  }
+                  64% {
+                    transform: rotate(-8deg);
+                  }
+                  70% {
+                    transform: rotate(8deg);
+                  }
+                  90% {
+                    transform: rotate(18deg);
+                  }
+                }
+
+                /* Examination Conical Searchlight Beam (Clicks on, sways, then clicks off) */
+                @keyframes searchlight-beam {
+                  0%, 54% {
+                    opacity: 0;
+                    transform: scale(0.8) rotate(0deg);
+                  }
+                  56% {
+                    opacity: 0.95;
+                    transform: scale(1.02) rotate(-6deg);
+                  }
+                  64% {
+                    opacity: 0.9;
+                    transform: scale(1) rotate(6deg);
+                  }
+                  70% {
+                    opacity: 0.9;
+                    transform: scale(1) rotate(-4deg);
+                  }
+                  74% {
+                    opacity: 0.85;
+                    transform: scale(1) rotate(0deg);
+                  }
+                  76%, 100% {
+                    opacity: 0;
+                    transform: scale(0.8) rotate(0deg);
+                  }
+                }
+
+                /* Expressive Blinking Eyes */
+                @keyframes eye-blink {
+                  0%, 42%, 46%, 70%, 74%, 100% {
+                    transform: scaleY(1);
+                  }
+                  44%, 72% {
+                    transform: scaleY(0.1);
+                  }
+                }
+
+                /* Subtle Float for Background Atmospheric Motes */
+                @keyframes dust-float {
+                  0%, 100% {
+                    transform: translateY(0px) translateX(0px);
+                    opacity: 0.3;
+                  }
+                  50% {
+                    transform: translateY(-8px) translateX(4px);
+                    opacity: 0.7;
+                  }
+                }
+
+                .anim-spiney {
+                  animation: spiney-traversal 8.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+                  transform-origin: 30px 65px;
+                }
+                .anim-shadow {
+                  animation: shadow-physics 8.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+                  transform-origin: center;
+                }
+                .anim-leaf {
+                  animation: leaf-followthrough 8.5s ease-in-out infinite;
+                  transform-origin: 25px 12px;
+                }
+                .anim-beam {
+                  animation: searchlight-beam 8.5s ease-in-out infinite;
+                  transform-origin: 25px 25px;
+                }
+                .anim-eyes {
+                  animation: eye-blink 8.5s infinite;
+                  transform-origin: center;
+                }
+                .anim-dust-1 { animation: dust-float 4s ease-in-out infinite; }
+                .anim-dust-2 { animation: dust-float 5s ease-in-out infinite 1.5s; }
+                .anim-dust-3 { animation: dust-float 4.5s ease-in-out infinite 0.8s; }
+
+                @media (prefers-reduced-motion: reduce) {
+                  .anim-spiney {
+                    animation: none !important;
+                    transform: translate(280px, 140px) !important;
+                  }
+                  .anim-shadow {
+                    animation: none !important;
+                    transform: translate(280px, 204px) !important;
+                  }
+                  .anim-leaf, .anim-beam, .anim-eyes, .anim-dust-1, .anim-dust-2, .anim-dust-3 {
+                    animation: none !important;
+                  }
+                }
+              `}</style>
+            </defs>
+
+            {/* Background Perspective Floor Line */}
+            <path
+              d="M 20 205 L 580 205"
+              stroke="url(#floorGrad)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+
+            {/* Atmospheric Therapeutic Motes */}
+            <circle cx="110" cy="80" r="2.5" fill="#8CB843" className="anim-dust-1" />
+            <circle cx="240" cy="50" r="1.8" fill="#468EC8" className="anim-dust-2" />
+            <circle cx="510" cy="95" r="2.2" fill="#8CB843" className="anim-dust-3" />
+            <circle cx="430" cy="40" r="1.5" fill="#CBD5E1" className="anim-dust-1" />
+
+            {/* =============================================================
+                STATIC BACKGROUND NUMERALS: "4 0 4"
+               ============================================================= */}
+            <g className="font-heading font-black select-none opacity-25 dark:opacity-30">
+              {/* Left '4' */}
+              <text
+                x="145"
+                y="190"
+                fontSize="130"
+                fontWeight="900"
+                textAnchor="middle"
+                fill="#64748B"
+                letterSpacing="-4px"
+              >
+                4
+              </text>
+
+              {/* Center '0' (Vertebra Alignment Ring) */}
+              <text
+                x="300"
+                y="190"
+                fontSize="130"
+                fontWeight="900"
+                textAnchor="middle"
+                fill="#64748B"
+                letterSpacing="-4px"
+              >
+                0
+              </text>
+
+              {/* Right '4' */}
+              <text
+                x="455"
+                y="190"
+                fontSize="130"
+                fontWeight="900"
+                textAnchor="middle"
+                fill="#64748B"
+                letterSpacing="-4px"
+              >
+                4
+              </text>
+            </g>
+
+            {/* Dynamic Contact Floor Shadow under Spiney */}
+            <ellipse
+              cx="0"
+              cy="0"
+              rx="22"
+              ry="5.5"
+              fill="#0F172A"
+              className="anim-shadow"
+            />
+
+            {/* =============================================================
+                ANIMATED HERO CHARACTER: "SPINEY THE POSTURE EXPLORER"
+               ============================================================= */}
+            <g className="anim-spiney">
               
-              {/* Misaligned or Realigned "0" Ring representing the displaced vertebra disc */}
-              <div 
-                className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-out ${
-                  isAdjusted 
-                    ? "rotate-0 scale-100 text-primary drop-shadow-[0_8px_16px_rgba(118,164,54,0.25)]" 
-                    : isAnimating 
-                      ? "-rotate-12 scale-90 translate-y-2 text-amber-500" 
-                      : "rotate-18 -translate-y-1 text-slate-300 drop-shadow-sm"
-                }`}
-              >
-                {/* Stylized Vertebra Oval (The '0') */}
-                <svg
-                  viewBox="0 0 100 120"
-                  className="w-24 sm:w-32 h-32 sm:h-40 overflow-visible transition-transform duration-500"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <linearGradient id="vertebraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor={isAdjusted ? "#8CB843" : "#94A3B8"} />
-                      <stop offset="100%" stopColor={isAdjusted ? "#76A436" : "#64748B"} />
-                    </linearGradient>
-                    <linearGradient id="discGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor={isAdjusted ? "#60A5FA" : "#CBD5E1"} />
-                      <stop offset="100%" stopColor={isAdjusted ? "#3B82F6" : "#94A3B8"} />
-                    </linearGradient>
-                  </defs>
+              {/* 1. Conical Examination Beam (Projects from Headlamp onto Ground) */}
+              <g className="anim-beam pointer-events-none">
+                {/* Conical Light Flare */}
+                <polygon
+                  points="25,25 -25,120 75,120"
+                  fill="url(#lightBeamGrad)"
+                />
+                {/* Illuminated Floor Spotlight Pool */}
+                <ellipse
+                  cx="25"
+                  cy="120"
+                  rx="48"
+                  ry="12"
+                  fill="url(#floorPoolGrad)"
+                />
+                {/* Tiny Footprint / Lost Page Hint inside the Beam */}
+                <g opacity="0.75" transform="translate(18, 114) scale(0.65)">
+                  <rect x="0" y="0" width="14" height="18" rx="2" fill="#FFFFFF" stroke="#76A436" strokeWidth="1.5" />
+                  <line x1="3" y1="5" x2="11" y2="5" stroke="#76A436" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="3" y1="9" x2="11" y2="9" stroke="#76A436" strokeWidth="1.5" strokeLinecap="round" />
+                  <line x1="3" y1="13" x2="8" y2="13" stroke="#76A436" strokeWidth="1.5" strokeLinecap="round" />
+                </g>
+              </g>
 
-                  {/* Outer Vertebra Body Ring */}
-                  <rect
-                    x="15"
-                    y="12"
-                    width="70"
-                    height="96"
-                    rx="35"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="15"
-                    strokeLinecap="round"
-                    className="transition-all duration-500"
-                  />
+              {/* 2. Botanical Leaf Crest (The Clinic Logo Motif) */}
+              <g className="anim-leaf">
+                <path
+                  d="M 25 12 C 25 12 14 3 19 -2 C 23 -6 32 3 25 12 Z"
+                  fill="#76A436"
+                />
+                <path
+                  d="M 25 12 C 25 12 36 3 31 -2 C 27 -6 18 3 25 12 Z"
+                  fill="#8CB843"
+                  opacity="0.9"
+                />
+              </g>
 
-                  {/* Spinal Canal Aperture / Core Disc */}
-                  <ellipse
-                    cx="50"
-                    cy="60"
-                    rx="14"
-                    ry="20"
-                    fill="white"
-                    className="shadow-inner"
-                  />
+              {/* 3. Cervical Head (C1 Atlas) with Headlamp */}
+              <g>
+                {/* Head Body */}
+                <rect
+                  x="8"
+                  y="14"
+                  width="34"
+                  height="22"
+                  rx="9"
+                  fill="url(#headGrad)"
+                  stroke="#334155"
+                  strokeWidth="1.5"
+                />
 
-                  {/* Intervertebral Disc Cushion Accent */}
-                  <path
-                    d="M 32 60 Q 50 66 68 60"
-                    stroke={isAdjusted ? "#76A436" : "#CBD5E1"}
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                </svg>
-              </div>
+                {/* Headlamp Rim (The Source of the Searchlight) */}
+                <circle cx="25" cy="25" r="4.5" fill="#FEF08A" stroke="#76A436" strokeWidth="1.5" />
+                <circle cx="25" cy="25" r="2" fill="#FFFFFF" />
 
-              {/* "Spiney" The Animated Walking & Adjusting Character Mascot */}
-              <div 
-                className={`relative z-20 flex flex-col items-center transition-all duration-500 ${
-                  isAnimating 
-                    ? "scale-90 translate-y-3" 
-                    : isAdjusted 
-                      ? "scale-105 -translate-y-1" 
-                      : "scale-95 translate-y-1 rotate-6"
-                }`}
-              >
-                <svg
-                  viewBox="0 0 100 130"
-                  className="w-20 sm:w-26 h-26 sm:h-34 overflow-visible"
-                  aria-hidden="true"
-                >
-                  {/* Healthwise Botanical Leaf Crest (The Clinic Logo Motif) */}
-                  <g 
-                    className={`transition-all duration-700 origin-bottom ${
-                      isAdjusted ? "scale-100 rotate-0" : "-rotate-12 scale-90 opacity-70"
-                    }`}
-                  >
-                    <path
-                      d="M 50 18 C 50 18 36 6 42 0 C 48 -4 58 8 50 18 Z"
-                      fill="#76A436"
-                    />
-                    <path
-                      d="M 50 18 C 50 18 64 6 58 0 C 52 -4 42 8 50 18 Z"
-                      fill="#8CB843"
-                      opacity="0.85"
-                    />
-                  </g>
+                {/* Blinking Expressive Eyes */}
+                <g className="anim-eyes">
+                  <circle cx="16" cy="22" r="2.6" fill="#FFFFFF" />
+                  <circle cx="34" cy="22" r="2.6" fill="#FFFFFF" />
+                  <circle cx="17.2" cy="22" r="1.3" fill="#0F172A" />
+                  <circle cx="35.2" cy="22" r="1.3" fill="#0F172A" />
+                  {/* Rosy Ergonomic Cheeks */}
+                  <circle cx="13" cy="28" r="1.8" fill="#FFBC7D" />
+                  <circle cx="37" cy="28" r="1.8" fill="#FFBC7D" />
+                </g>
+              </g>
 
-                  {/* Cervical Vertebra (Head with Expressive Eyes) */}
-                  <g 
-                    className={`transition-transform duration-500 origin-center ${
-                      !isAdjusted ? "translate-x-1" : "translate-x-0"
-                    }`}
-                  >
-                    {/* Head / C1 Atlas */}
-                    <rect
-                      x="30"
-                      y="20"
-                      width="40"
-                      height="24"
-                      rx="10"
-                      fill="#1E293B"
-                    />
-                    {/* Friendly Eyes */}
-                    {isAdjusted ? (
-                      // Happy relaxed eyes (adjusted state)
-                      <g stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" fill="none">
-                        <path d="M 40 33 Q 44 29 48 33" />
-                        <path d="M 52 33 Q 56 29 60 33" />
-                        {/* Cheerful rosy cheeks */}
-                        <circle cx="36" cy="36" r="2.5" fill="#FFBC7D" stroke="none" />
-                        <circle cx="64" cy="36" r="2.5" fill="#FFBC7D" stroke="none" />
-                      </g>
-                    ) : (
-                      // Quizzical / strained eyes looking sideways at the misaligned 404
-                      <g fill="#FFFFFF">
-                        <circle cx="43" cy="32" r="3" />
-                        <circle cx="57" cy="32" r="3" />
-                        {/* Pupils looking to the side */}
-                        <circle cx="44.5" cy="32.5" r="1.5" fill="#0F172A" />
-                        <circle cx="58.5" cy="32.5" r="1.5" fill="#0F172A" />
-                        {/* Sweat droplet (mild tension) */}
-                        <path d="M 66 22 Q 68 25 66 28 Q 64 25 66 22 Z" fill="#60A5FA" />
-                      </g>
-                    )}
-                  </g>
+              {/* 4. Flexible Intervertebral Discs & Vertebrae Body */}
+              {/* Disc 1 (Cervical-Thoracic) */}
+              <rect x="14" y="38" width="22" height="5" rx="2.5" fill="#468EC8" />
 
-                  {/* Flexible Spine Discs (Thoracic & Lumbar Column) */}
-                  {/* Disc 1 (Cervical-Thoracic Junction) */}
-                  <rect
-                    x={isAdjusted ? "38" : "42"}
-                    y="46"
-                    width="24"
-                    height="6"
-                    rx="3"
-                    fill={isAdjusted ? "#76A436" : "#94A3B8"}
-                    className="transition-all duration-500"
-                  />
+              {/* Thoracic Vertebra Body */}
+              <rect
+                x="11"
+                y="45"
+                width="28"
+                height="15"
+                rx="6"
+                fill="url(#vertebraGrad)"
+                stroke="#65A30D"
+                strokeWidth="1"
+              />
 
-                  {/* Vertebra T-Spine */}
-                  <rect
-                    x={isAdjusted ? "33" : "38"}
-                    y="54"
-                    width="34"
-                    height="18"
-                    rx="8"
-                    fill={isAdjusted ? "#76A436" : "#64748B"}
-                    className="transition-all duration-500"
-                  />
+              {/* Disc 2 (Thoracic-Lumbar Cushion) */}
+              <rect x="13" y="62" width="24" height="5" rx="2.5" fill="#468EC8" />
 
-                  {/* Disc 2 (Thoraco-Lumbar Cushion) */}
-                  <rect
-                    x={isAdjusted ? "37" : "39"}
-                    y="74"
-                    width="26"
-                    height="6"
-                    rx="3"
-                    fill={isAdjusted ? "#468EC8" : "#94A3B8"}
-                    className="transition-all duration-500"
-                  />
+              {/* Lumbar Vertebra Body (Core Support) */}
+              <rect
+                x="9"
+                y="69"
+                width="32"
+                height="16"
+                rx="7"
+                fill="url(#vertebraGrad)"
+                stroke="#65A30D"
+                strokeWidth="1"
+              />
 
-                  {/* Vertebra L-Spine (Lumbar Core) */}
-                  <rect
-                    x={isAdjusted ? "31" : "33"}
-                    y="82"
-                    width="38"
-                    height="20"
-                    rx="9"
-                    fill={isAdjusted ? "#76A436" : "#475569"}
-                    className="transition-all duration-500"
-                  />
+              {/* Disc 3 (Lumbar-Sacral Foundation) */}
+              <rect x="12" y="87" width="26" height="5" rx="2.5" fill="#468EC8" />
 
-                  {/* Disc 3 (Lumbar-Sacral Foundation) */}
-                  <rect
-                    x={isAdjusted ? "36" : "37"}
-                    y="104"
-                    width="28"
-                    height="6"
-                    rx="3"
-                    fill={isAdjusted ? "#468EC8" : "#94A3B8"}
-                    className="transition-all duration-500"
-                  />
-
-                  {/* Sacrum & Pelvic Feet (Stable Grounding Base) */}
-                  <path
-                    d={
-                      isAdjusted
-                        ? "M 24 118 Q 50 110 76 118 L 72 126 Q 50 120 28 126 Z"
-                        : "M 22 120 Q 50 114 74 122 L 70 128 Q 50 122 26 128 Z"
-                    }
-                    fill="#1E293B"
-                    className="transition-all duration-500"
-                  />
-                </svg>
-              </div>
-            </div>
-
-            {/* Number "4" Right */}
-            <span className="font-heading text-6xl sm:text-8xl font-black tracking-tighter text-slate-300 transition-colors duration-500 select-none">
-              4
-            </span>
-          </div>
-
-          {/* Interactive Micro-Cue (Encourages patient tactile delight) */}
-          <div className="mt-2 inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 group-hover:text-primary transition-colors">
-            <RefreshCw className={`h-3 w-3 ${isAnimating ? "animate-spin" : "group-hover:rotate-45"} transition-transform`} />
-            <span>
-              {isAdjusted ? "Click to re-align again" : "Click Spiney to perform a gentle adjustment"}
-            </span>
-            {clickCount > 1 && (
-              <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-mono">
-                {clickCount} adjustments
-              </span>
-            )}
-          </div>
+              {/* 5. Sacrum & Pelvic Feet (Spring Base) */}
+              <path
+                d="M 5 95 C 15 90 35 90 45 95 C 42 101 8 101 5 95 Z"
+                fill="#1E293B"
+              />
+            </g>
+          </svg>
         </div>
 
-        {/* Narrative & Helpful Guidance */}
-        <div className="space-y-3 mt-4 max-w-lg">
-          <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            {isAdjusted ? "Let’s Get You Back into Alignment" : "Looks Like This Link Is Out of Alignment"}
+        {/* Narrative & Reassurance */}
+        <div className="space-y-2.5 mt-1 sm:mt-2 max-w-lg">
+          <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            We’ve Examined Every Vertebra...
           </h1>
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            {isAdjusted ? (
-              <>
-                The page you are looking for has moved or no longer exists. While Spiney is now standing tall and aligned, let us guide you back to our clinic services or help you book an assessment.
-              </>
-            ) : (
-              <>
-                Our chiropractors in Cranford specialize in gentle spinal correction, but this URL seems to have slipped off course. Let us guide you back to comfort.
-              </>
-            )}
+            Our posture explorer searched high and low, but this page seems to have slipped out of alignment. Let us guide you back to our clinic services or help you schedule a consultation.
           </p>
         </div>
 
@@ -407,7 +579,7 @@ export default function NotFound() {
         </div>
 
         {/* Clinic Reassurance & Direct Contact */}
-        <div className="mt-8 pt-6 border-t border-slate-200/60 w-full max-w-md text-center space-y-2 text-xs text-slate-500">
+        <div className="mt-6 sm:mt-8 pt-5 border-t border-slate-200/60 w-full max-w-md text-center space-y-2 text-xs text-slate-500">
           <p className="font-medium text-slate-700">
             Experiencing acute back or neck discomfort? Speak directly with our team.
           </p>
@@ -425,7 +597,7 @@ export default function NotFound() {
       </main>
 
       {/* Trust & Regulatory Footer */}
-      <footer className="relative z-10 text-center text-xs text-slate-400 pt-6">
+      <footer className="relative z-10 text-center text-xs text-slate-400 pt-4">
         <p>&copy; {new Date().getFullYear()} {SITE_CONFIG.name}. Regulated by the General Chiropractic Council.</p>
       </footer>
     </div>
