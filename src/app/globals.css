@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand HSL Colors */
+    /* Healthwise Herbal Olive: #76A436 -> 88, 51%, 43% */
+    --primary: 88 51% 43%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 88 54% 37%;
+
+    /* Soft Medical Blue: #468EC8 -> 207, 53%, 53% */
+    --secondary: 207 53% 53%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Crisp Clinical Off-White Canvas */
+    --background: 120 10% 98.5%;
+    /* Deep Slate Charcoal Text: #0F172A */
+    --foreground: 222 47% 11%;
+
+    /* Surface Cards & Elements */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Muted Slate Grays */
+    --muted: 210 20% 96.5%;
+    --muted-foreground: 215 16% 47%;
+
+    /* Warm Highlight Accent: #FFBC7D */
+    --accent: 28 100% 74%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 88 51% 43%;
+
+    /* Bklit Chart Palette */
+    --chart-1: 88 51% 43%;    /* Healthwise Herbal Olive */
+    --chart-2: 207 53% 53%;   /* Soft Medical Blue */
+    --chart-3: 160 60% 45%;   /* Emerald Recovery */
+    --chart-4: 38 92% 50%;    /* Warm Amber */
+    --chart-5: 220 70% 50%;   /* Deep Indigo */
+
+    --radius: 0.5rem; /* 8px Base Radius */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+/* Card-Only Subtle Shadow and Inner Highlight Rule */
+@layer utilities {
+  .shadow-card-elevated {
+    box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.06), 0 1px 3px -1px rgba(15, 23, 42, 0.04);
+  }
+
+  .shadow-card-dashboard {
+    box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.06), 0 1px 3px -1px rgba(15, 23, 42, 0.04), inset 0 1px 0 0 rgba(255, 255, 255, 0.85);
+  }
+}
