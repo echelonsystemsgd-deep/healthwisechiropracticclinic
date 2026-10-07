@@ -796,18 +796,22 @@ The internal practice growth portal (`/admin/outreach`) must never expose public
 - **Dedicated Unbranded Layout:** Create `src/app/admin/layout.tsx` providing an isolated internal dashboard shell. It does not render the public clinic navigation, appointment booking CTA, or patient footer.
 - **Dashboard Branding Identity:** Brand as an internal operations tool with neutral title: `"Outreach & Partner Pipeline | Practice Growth System"` [CONFIRM: Agency name vs Internal clinic tool name]. Use a minimalist operational glyph icon instead of the public medical clinic leaf/spine logo.
 
-### 13.6 Bespoke Animated 404 Experience & Route Realignment System
-To provide patients and staff with a comforting, memorable brand interaction rather than a sterile dead-end:
-1. **The Hero Character ("Spiney & The Realigned Vertebra"):**
-   - Pure inline vector SVG character with articulated vertebral segments and the clinic's botanical leaf crest.
-   - Narrative arc: Enters stooped at an 18° tilt alongside a misaligned "0" in the 404 number, compresses in anticipation, and triggers an elastic chiropractic adjustment snap accompanied by an emerald-teal therapeutic halo and sparkle shockwave.
-   - Interactive micro-state: Patients and staff can click Spiney or the "0" anytime to trigger real-time chiropractic adjustments.
+### 13.6 Bespoke Animated 404 Experience & Continuous Looping System
+To provide patients and staff with a comforting, memorable brand interaction rather than a sterile dead-end (modeled directly on the vintage desk lamp reference video):
+1. **The Hero Character ("Spiney the Posture Explorer"):**
+   - Pure inline vector SVG character with articulated vertebral segments, flexible intervertebral discs, and the clinic's botanical leaf crest.
+   - **Autonomous Continuous Looping Cycle (8.5s timeline):**
+     - *Phase 1 (Traversal):* Progressive 3-hop traversal across the stage using genuine squash-and-stretch physics (`scale(1.18, 0.8)` on launch, `scale(0.85, 1.25)` at apex, `scale(1.22, 0.78)` on impact).
+     - *Phase 2 (Inquisitive Pause):* Pauses center-stage in front of the background "404" numerals, tilting head left and right with blinking expressive eyes.
+     - *Phase 3 (Examination Searchlight):* Headlamp clicks ON with a radiant conical beam (`#8CB843` / `#A3E635`), casting an illuminated floor spotlight and swaying to inspect the ground for the missing route.
+     - *Phase 4 (Seamless Reset):* Light clicks off, Spiney bounds back to starting coordinates, looping endlessly without requiring any user clicks or causing jarring layout shifts.
+   - **Physics & Secondary Motion:** Synchronized floor contact shadow expansion/contraction, and organic inertial follow-through on the botanical leaf crest.
 2. **Multi-Surface 404 Coverage:**
    - **Public Site (`src/app/not-found.tsx`):** Warm clinic aesthetic, primary CTA to `/book-online`, secondary CTA to `/`, and direct clinic reception telephone link (`0208 759 7177`).
    - **Internal Admin (`src/app/admin/not-found.tsx`):** Isolated dark-theme operations shell, returning staff to `/admin/outreach` or `/` without patient booking leaks.
    - **Catch-All Interceptor (`src/app/[...not_found]/page.tsx`):** Calls `notFound()` to ensure all deeply nested or invalid URLs cleanly invoke the branded 404 handler.
 3. **Reference Documentation:**
-   - Detailed mechanical breakdown and Disney animation principles documented in `implementation/404_animation_experience.md`.
+   - Detailed mechanical breakdown and Disney animation principles documented in `implementation/404_looping_animation_brainstorm.md` and `implementation/404_animation_experience.md`.
 
 ---
 *End of Master Architectural Specification.*

@@ -21,45 +21,53 @@ Rather than presenting a sterile "Page Not Found" dead-end, the 404 page is styl
 
 | Dimension | Reference Video (Antique Shop Lamp) | Healthwise Chiropractic Clinic Implementation |
 | :--- | :--- | :--- |
-| **Character** | Vintage brass desk lamp (Pixar *Luxo Jr* inspired) | **"Spiney" The Articulated Vertebral Column** (crowned with the clinic's herbal leaf crest) |
-| **Problem / Conflict** | Searching dark, dusty attic shelves for a missing antique | A subluxated, crooked "0" resting at an unnatural 18° tilt beside a stiff spinal column |
-| **Kinematic Physics** | Accordion spring squash-and-stretch hopping | Forward-head waddle $\rightarrow$ anticipatory deep compression $\rightarrow$ elastic recoil snap |
-| **The "Click" (Climax)** | Lamp head clicks on, projecting a warm cone of light | **Chiropractic Adjustment**: A soundless visual pop, sparkling particle burst, and radiant emerald-teal therapeutic halo |
-| **Resolution** | Light reveals the missing item message & CTA button | The crooked "0" spins straight to 0°, Spiney adopts perfect upright posture with smiling eyes, and clear booking CTAs unlock |
-| **User Interactivity** | Passive video playback | **Interactive Micro-Game**: Visitors can click Spiney or the "0" anytime to trigger real-time adjustments with an adjustment counter |
+| **Character** | Vintage brass desk lamp (Pixar *Luxo Jr* inspired) | **"Spiney the Posture Explorer"** (Articulated vertebral column crowned with the clinic's herbal leaf crest) |
+| **Problem / Conflict** | Searching dark, dusty attic shelves for a missing antique | Inspecting a missing route in front of giant background "404" numerals |
+| **Kinematic Physics** | Accordion spring squash-and-stretch hopping across the floor | **3-Hop Squash & Stretch Traversal**: Launch squash (`scale(1.18, 0.8)`) $\rightarrow$ Airborne stretch (`scale(0.85, 1.25)`) $\rightarrow$ Ground impact rebound (`scale(1.22, 0.78)`) |
+| **The "Click" (Climax)** | Lamp head clicks on, projecting a warm cone of light | **Clinical Searchlight Beam**: Headlamp snaps ON, casting a vibrant emerald/lime conical beam and illuminated floor spotlight pool |
+| **Search & Resolution** | Lamp head sweeps the floor, discovers nothing, and shrugs | Beam and Spiney sway from $-6^\circ$ to $+6^\circ$, inspecting the floor with a subtle lost document motif, before clicking off and seamlessly repeating |
+| **User Interactivity** | Passive, mesmerizing continuous loop | **Autonomous Cinematic Loop**: Zero user prompts or manual clicks required. 8.5s continuous loop running in 60fps GPU-accelerated CSS |
 
 ---
 
 ## 3. Character Anatomy & Animation Principles
 
 ### 3.1 "Spiney" Vector Geometry
-1. **The Crown:** Dual-tone botanical leaf crest (`#76A436` Herbal Olive and `#8CB843` Leaf Green), matching the Healthwise clinic logo geometry.
-2. **Cervical / C1 Atlas (The Head):** Smooth slate container (`#1E293B`) with dual expressive states:
-   - *Misaligned State:* Quizzical, sideways-glancing pupils with a perspiration bead representing tension/strain.
-   - *Adjusted State:* Relaxed happy eyes (`stroke="#FFFFFF"`) and soft coral cheeks (`#FFBC7D`).
-3. **Thoracic & Lumbar Segments:** 3 articulated vertebrae bodies cushioned by flexible intervertebral discs (`#468EC8` Cerulean Blue and `#76A436` Herbal Olive).
-4. **Sacrum & Pelvic Foundation:** Grounding pelvic curvature providing weighted balance during the squash-and-stretch cycle.
+1. **The Crown:** Dual-tone botanical leaf crest (`#76A436` Herbal Olive and `#8CB843` Leaf Green), matching the Healthwise clinic logo geometry, with inertial follow-through sway.
+2. **Cervical / C1 Atlas (The Head):** Smooth slate container (`#1E293B`) with headlamp fixture, blinking expressive eyes, and gentle coral cheeks (`#FFBC7D`).
+3. **Thoracic & Lumbar Segments:** Articulated vertebrae bodies cushioned by flexible intervertebral discs (`#468EC8` Cerulean Blue and `#76A436` Herbal Olive) that compress and expand with jump dynamics.
+4. **Sacrum & Pelvic Foundation:** Ergonomic curved foot-base providing weighted balance on the perspective floor plane.
+5. **Dynamic Contact Shadow:** Floor ellipse that scales down to 50% opacity in mid-air and expands to 135% on ground landing.
 
-### 3.2 Animation Timeline & Choreography
+### 3.2 Animation Timeline & Choreography (8.5s Seamless Loop)
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Patient as Visitor / Browser
-    participant Stage as 404 Viewport
+    actor Visitor as Visitor Viewport
     participant Spiney as Spiney (Mascot)
-    participant Zero as The Crooked "0"
-    participant Halo as Therapeutic Aura
+    participant Shadow as Dynamic Floor Shadow
+    participant Beam as Conical Searchlight
+    participant Floor as Floor Stage & 404
 
-    Patient->>Stage: Accesses invalid or moved route
-    Stage->>Spiney: Mounts in tilted, stooped posture (18° tilt)
-    Stage->>Zero: Renders tilted and slightly unstable
-    Note over Spiney,Zero: 1.2s delay for patient orientation
-    Stage->>Spiney: Anticipation compression (scaleY: 0.9, translate-y-3)
-    Spiney->>Zero: Adjustment trigger! (Elastic recoil scaleY: 1.05)
-    Spiney->>Halo: Emits radiant emerald/teal healing cone & sparkles
-    Zero->>Zero: Rotates smoothly from 18° to 0° alignment
-    Spiney->>Spiney: Smiles with relaxed eyes & rosy cheeks
-    Stage->>Patient: Displays "Book Appointment" & "Call Reception" CTAs
+    Note over Spiney, Floor: 0.0s – 3.4s: Traversal across the numbers (3 Hops)
+    Spiney->>Floor: Hop 1 (Launch squash -> High apex -> Land squash)
+    Shadow->>Floor: Shadow contracts during flight, expands on impact
+    Spiney->>Floor: Hop 2 into center-stage (X: 280)
+    
+    Note over Spiney, Floor: 3.4s – 4.7s: Inquisitive Center Pause
+    Spiney->>Floor: Stands center in front of "404"
+    Spiney->>Spiney: Tilts head left (-8°), blinks
+    Spiney->>Spiney: Tilts head right (+8°), scans horizon
+
+    Note over Spiney, Floor: 4.7s – 6.5s: Searchlight Examination
+    Spiney->>Beam: Headlamp clicks ON!
+    Beam->>Floor: Casts emerald/lime conical light & floor pool
+    Beam->>Floor: Sways -6° to +6° sweeping the floor
+    
+    Note over Spiney, Floor: 6.5s – 8.5s: Light Off & Reset
+    Beam->>Beam: Light clicks OFF
+    Spiney->>Floor: Bounds back to start coordinates
+    Note over Spiney, Floor: Seamless loop restarts at 0.0s without stutter
 ```
 
 ---
