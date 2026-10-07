@@ -796,5 +796,18 @@ The internal practice growth portal (`/admin/outreach`) must never expose public
 - **Dedicated Unbranded Layout:** Create `src/app/admin/layout.tsx` providing an isolated internal dashboard shell. It does not render the public clinic navigation, appointment booking CTA, or patient footer.
 - **Dashboard Branding Identity:** Brand as an internal operations tool with neutral title: `"Outreach & Partner Pipeline | Practice Growth System"` [CONFIRM: Agency name vs Internal clinic tool name]. Use a minimalist operational glyph icon instead of the public medical clinic leaf/spine logo.
 
+### 13.6 Bespoke Animated 404 Experience & Route Realignment System
+To provide patients and staff with a comforting, memorable brand interaction rather than a sterile dead-end:
+1. **The Hero Character ("Spiney & The Realigned Vertebra"):**
+   - Pure inline vector SVG character with articulated vertebral segments and the clinic's botanical leaf crest.
+   - Narrative arc: Enters stooped at an 18° tilt alongside a misaligned "0" in the 404 number, compresses in anticipation, and triggers an elastic chiropractic adjustment snap accompanied by an emerald-teal therapeutic halo and sparkle shockwave.
+   - Interactive micro-state: Patients and staff can click Spiney or the "0" anytime to trigger real-time chiropractic adjustments.
+2. **Multi-Surface 404 Coverage:**
+   - **Public Site (`src/app/not-found.tsx`):** Warm clinic aesthetic, primary CTA to `/book-online`, secondary CTA to `/`, and direct clinic reception telephone link (`0208 759 7177`).
+   - **Internal Admin (`src/app/admin/not-found.tsx`):** Isolated dark-theme operations shell, returning staff to `/admin/outreach` or `/` without patient booking leaks.
+   - **Catch-All Interceptor (`src/app/[...not_found]/page.tsx`):** Calls `notFound()` to ensure all deeply nested or invalid URLs cleanly invoke the branded 404 handler.
+3. **Reference Documentation:**
+   - Detailed mechanical breakdown and Disney animation principles documented in `implementation/404_animation_experience.md`.
+
 ---
-*End of Master Architectural Specification — Awaiting User Approval to Proceed to Implementation.*
+*End of Master Architectural Specification.*
