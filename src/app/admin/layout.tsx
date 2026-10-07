@@ -59,9 +59,20 @@ export default function AdminLayout({
       {/* Admin Content Area */}
       <main className="flex-1">{children}</main>
 
-      {/* Neutral Internal Operational Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800 text-slate-500 text-xs py-4 px-6 text-center">
-        <p>Internal Operations Environment • Unauthorised Access Prohibited • Strict Confidentiality</p>
+      {/* Internal Operational Footer with Agency Attribution */}
+      <footer className="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-4 px-6 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-2">
+        <p>Internal Operations Environment • Strict Practice Confidentiality</p>
+        <p className="text-slate-400">
+          Growth Architecture by{" "}
+          <a
+            href="https://mercianwealth.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-300 hover:text-white font-medium underline-offset-4 hover:underline transition-colors"
+          >
+            Mercian Wealth
+          </a>
+        </p>
       </footer>
     </div>
   );

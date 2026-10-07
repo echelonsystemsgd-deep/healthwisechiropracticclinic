@@ -1,21 +1,62 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { CLINIC_CONFIG } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X, Shield, Calendar, Clock } from "lucide-react";
+import {
+  Phone,
+  Menu,
+  X,
+  ShieldCheck,
+  Calendar,
+  Clock,
+  MessageCircle,
+  ChevronRight,
+  MapPin,
+} from "lucide-react";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Lock background body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      // Prevent iOS bounce scrolling
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Close drawer on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+    if (mobileMenuOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
-    { label: "Services", href: "/#services" },
-    { label: "How It Works", href: "/#first-visit" },
-    { label: "Our Team", href: "/#practitioners" },
-    { label: "Reviews", href: "/#reviews" },
-    { label: "FAQ", href: "/#faq" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Clinical Services", href: "/#services" },
+    { label: "First Visit Journey", href: "/#first-visit" },
+    { label: "Our Practitioners", href: "/#practitioners" },
+    { label: "Patient Reviews", href: "/#reviews" },
+    { label: "FAQ & Pricing", href: "/#faq" },
+    { label: "Contact & Location", href: "/#contact" },
   ];
 
   return (
@@ -89,7 +130,7 @@ export function Header() {
             <Phone className="h-4 w-4 text-primary" />
             <span>{CLINIC_CONFIG.phoneDisplay}</span>
           </a>
-          <Button asChild size="default" className="font-semibold">
+          <Button asChild size="default" className="font-semibold shadow-xs">
             <Link href="/book-online" className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               <span>Book Appointment</span>
@@ -97,62 +138,159 @@ export function Header() {
           </Button>
         </div>
 
-        {/* Mobile Menu Toggle Button */}
+        {/* Mobile Header Controls */}
         <div className="flex items-center gap-2 lg:hidden">
-          <Button asChild size="sm" className="font-semibold sm:hidden">
+          <Button asChild size="sm" className="font-semibold sm:hidden shadow-xs">
             <Link href="/book-online">Book</Link>
           </Button>
           <button
             type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
-            aria-label="Toggle navigation menu"
+            onClick={() => setMobileMenuOpen(true)}
+            className="p-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-hidden focus:ring-2 focus:ring-primary/20"
+            aria-label="Open mobile navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            <Menu className="h-6 w-6" />
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-200 bg-white px-4 py-6 shadow-xl animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-3">
+      {/* =========================================================================
+          MOBILE SLIDE-OVER SIDE DRAWER & BACKGROUND BACKDROP OVERLAY
+         ========================================================================= */}
+      
+      {/* 1. Backdrop Blur Overlay */}
+      <div
+        className={`fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 transition-opacity duration-300 lg:hidden ${
+          mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* 2. Side Slide-In Panel (from the Right) */}
+      <div
+        className={`fixed top-0 bottom-0 right-0 w-[86%] max-w-sm bg-white shadow-2xl z-50 flex flex-col justify-between transition-transform duration-300 ease-out lg:hidden border-l border-slate-200 ${
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation Menu"
+      >
+        {/* Drawer Header */}
+        <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="flex items-center gap-2.5">
+            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center text-white font-heading font-bold text-base shadow-xs">
+              HW
+            </div>
+            <div>
+              <span className="font-heading text-sm font-bold text-slate-900 block leading-tight">
+                Healthwise Clinic
+              </span>
+              <span className="text-[11px] text-slate-500 font-medium">
+                Cranford, Hounslow • Est. 2002
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(false)}
+            className="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200/60 transition-colors"
+            aria-label="Close navigation menu"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Drawer Scrollable Content Area */}
+        <div className="flex-1 overflow-y-auto px-4 py-5 space-y-6">
+          {/* Navigation Links */}
+          <nav className="flex flex-col space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 pb-2">
+              Navigation
+            </span>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-slate-800 hover:text-primary hover:bg-slate-50 px-3 py-2.5 rounded-lg transition-colors"
+                className="flex items-center justify-between text-sm font-medium text-slate-700 hover:text-primary hover:bg-slate-50 px-3 py-2.5 rounded-lg transition-colors group"
               >
-                {link.label}
+                <span>{link.label}</span>
+                <ChevronRight className="h-4 w-4 text-slate-400 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
               </Link>
             ))}
-            <div className="pt-4 border-t border-slate-200 flex flex-col gap-3">
-              <a
-                href={CLINIC_CONFIG.phoneUrl}
-                className="flex items-center justify-center gap-2 text-sm font-semibold text-slate-800 py-3 rounded-lg border border-slate-300 bg-slate-50"
-              >
-                <Phone className="h-4 w-4 text-primary" />
-                <span>Call {CLINIC_CONFIG.phoneDisplay}</span>
-              </a>
-              <Button asChild size="lg" className="w-full font-semibold">
-                <Link
-                  href="/book-online"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2"
-                >
-                  <Calendar className="h-5 w-5" />
-                  <span>Request an Appointment</span>
-                </Link>
-              </Button>
-            </div>
           </nav>
+
+          {/* Direct Patient Action Buttons */}
+          <div className="space-y-2.5 pt-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-1">
+              Direct Access
+            </span>
+
+            <Button asChild size="lg" className="w-full font-semibold shadow-xs">
+              <Link
+                href="/book-online"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2"
+              >
+                <Calendar className="h-4 w-4" />
+                <span>Book an Appointment</span>
+              </Link>
+            </Button>
+
+            <a
+              href={CLINIC_CONFIG.phoneUrl}
+              className="flex items-center justify-center gap-2 text-sm font-semibold text-slate-800 py-2.5 px-3 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 transition-colors w-full"
+            >
+              <Phone className="h-4 w-4 text-primary" />
+              <span>Call: {CLINIC_CONFIG.phoneDisplay}</span>
+            </a>
+
+            <a
+              href={CLINIC_CONFIG.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-sm font-semibold text-emerald-800 py-2.5 px-3 rounded-lg border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors w-full"
+            >
+              <MessageCircle className="h-4 w-4 text-emerald-600" />
+              <span>WhatsApp Reception</span>
+            </a>
+          </div>
+
+          {/* Clinic Hours & Address Card */}
+          <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200/80 space-y-2 text-xs text-slate-600">
+            <div className="flex items-start gap-2">
+              <MapPin className="h-3.5 w-3.5 text-primary shrink-0 mt-0.5" />
+              <span>{CLINIC_CONFIG.address.full}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+              <span>Mon–Sat: 8:00 AM – 7:00 PM</span>
+            </div>
+          </div>
         </div>
-      )}
+
+        {/* Drawer Footer & Regulatory Attribution */}
+        <div className="p-4 border-t border-slate-100 bg-slate-50/70 space-y-2 text-center">
+          <div className="flex items-center justify-center gap-1.5 text-emerald-700 text-xs font-semibold">
+            <ShieldCheck className="h-4 w-4" />
+            <span>GCC Statutory Regulated Practice</span>
+          </div>
+          <p className="text-[11px] text-slate-400">
+            Designed &amp; Built by{" "}
+            <a
+              href="https://mercianwealth.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-600 hover:text-slate-900 font-medium underline-offset-2 hover:underline transition-colors"
+            >
+              Mercian Wealth
+            </a>
+          </p>
+        </div>
+      </div>
     </header>
   );
 }

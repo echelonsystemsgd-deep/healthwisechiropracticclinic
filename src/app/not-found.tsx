@@ -596,9 +596,18 @@ export default function NotFound() {
         </div>
       </main>
 
-      {/* Trust & Regulatory Footer */}
-      <footer className="relative z-10 text-center text-xs text-slate-400 pt-4">
+      {/* Trust & Regulatory Footer with Agency Attribution */}
+      <footer className="relative z-10 text-center text-xs text-slate-400 pt-4 flex flex-col sm:flex-row items-center justify-center gap-2">
         <p>&copy; {new Date().getFullYear()} {SITE_CONFIG.name}. Regulated by the General Chiropractic Council.</p>
+        <span className="hidden sm:inline text-slate-300">•</span>
+        <a
+          href="https://mercianwealth.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-slate-400 hover:text-slate-700 transition-colors"
+        >
+          Designed &amp; Built by Mercian Wealth
+        </a>
       </footer>
     </div>
   );

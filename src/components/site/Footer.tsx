@@ -145,13 +145,22 @@ export function Footer() {
             &copy; {new Date().getFullYear()} {CLINIC_CONFIG.name}. All Rights Reserved. Regulated by the General Chiropractic Council (GCC).
           </p>
 
-          <div className="flex items-center gap-5">
+          <div className="flex flex-wrap items-center gap-5">
             <Link href="/privacy-policy" className="hover:text-slate-300 transition-colors">
               Privacy &amp; GDPR Policy
             </Link>
             <Link href="/book-online" className="hover:text-slate-300 transition-colors">
               Book Appointment
             </Link>
+            <span className="text-slate-700 hidden sm:inline">•</span>
+            <a
+              href="https://mercianwealth.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white font-medium transition-colors"
+            >
+              Designed &amp; Built by Mercian Wealth
+            </a>
           </div>
         </div>
       </div>
